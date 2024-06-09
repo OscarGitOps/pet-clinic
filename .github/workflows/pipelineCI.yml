@@ -8,8 +8,7 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-
-
-    - name: Saludo
-      run: |
-            echo "Hola Oscar!!???"      
+      - name: Saludo
+        run: |
+            echo "Hola Oscar!!???"  
+  
