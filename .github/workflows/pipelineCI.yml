@@ -11,5 +11,5 @@ jobs:
 
 
     - name: Saludo
-        run: |
+        run:|
             echo "Hola Oscar!!"      
