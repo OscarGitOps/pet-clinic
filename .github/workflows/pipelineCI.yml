@@ -1,0 +1,15 @@
+name: Workflows
+on:
+  push:
+    branches:
+      - feat-devsecops-osc
+
+jobs:        
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+
+
+    - name: Saludo
+        run: |
+            echo "Hola Oscar!!"      
