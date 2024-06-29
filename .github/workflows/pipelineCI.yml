@@ -27,3 +27,8 @@ jobs:
       - name: Log
         run: ls -R
 
+      ##permisos para gradlew y compilación de proyecto
+      - name: Build
+        run: | 
+          chmod 777 gradlew
+          ./gradlew build
