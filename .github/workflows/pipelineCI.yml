@@ -33,7 +33,7 @@ jobs:
       ##    chmod 777 gradlew
       ##    ./gradlew build
       
-     ##Validando tipo de proeycto, verificando si tiene el plugin de sonarqube aplicado en el eo build.gradle
+     ##Validando tipo de proeyecto, verificando si tiene el plugin de sonarqube aplicado en el eo build.gradle
       - name: Validando tipo de proyecto
         id: tipoProyecto
         run: |
@@ -53,6 +53,7 @@ jobs:
               echo "Tipo de proyecto desconocido"
             fi          
       
+       ##Validando y/o creando proyecto en SonarCloud. Estabbleciendo rama main como rama por defecto
       - name: Validando existencia de proyecto en SonarCloud
         id: validateProjectOnSonar
         run: |
