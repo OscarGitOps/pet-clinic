@@ -10,64 +10,38 @@ jobs:
 
     
     steps:
-     
-      ##requisito de SONAR para poder procesar el analisis
-      ##seteando maquina ubuntu
-      ##version de Java soportado por SONAR
 
+      #requesitos JDK para sonar
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
           java-version: '17'
           distribution: 'adopt'
-      
+    
+      #copia de proyecto
       - name: Checkout code
         uses: actions/checkout@v2  
-        
-      ##- name: Log
-      ##  run: ls -R
 
-      ##permisos para gradlew y compilación de proyecto
-      ##- name: Build
-      ##  run: | 
-      ##    chmod 777 gradlew
-      ##    ./gradlew build
-      
-     ##Validando tipo de proeyecto, verificando si tiene el plugin de sonarqube aplicado en el eo build.gradle
-      - name: Validando tipo de proyecto
-        id: tipoProyecto
-        run: |
-          if [ -f "build.gradle" ]
-            then
-              echo "Proyecto Java"
-              if grep -q 'id "org.sonarqube" version "3.3"' build.gradle
-              then
-                echo "El plugin de SonarCloud ya está presente en build.gradle"
-              else
-                sed -i '/id '\''java'\''/a \ \ \ \ id '\''org.sonarqube'\'' version '\''3.3'\''' build.gradle
-                echo "El plugin de SonarCloud no estaba presente y se ha sido añadido a build.gradle"
-                cat build.gradle
-              fi
+     #construccion/compilacion
+      - name: Build
+        run: | 
+          chmod 777 gradlew
+          ./gradlew build
     
-            else
-              echo "Tipo de proyecto desconocido"
-            fi          
-      
-       ##Validando y/o creando proyecto en SonarCloud. Estableciendo rama main como rama por defecto
+    #sonarcloud
       - name: Validando existencia de proyecto en SonarCloud
         id: validateProjectOnSonar
         run: |
-         #pwd
-         #ls -R
-         set +e
-         curl -f -X POST -u '${{ secrets.SONAR_TOKEN }}:' 'https://sonarcloud.io/api/projects/create' -d 'name=${{ github.event.repository.name }}' -d 'project=${{ github.event.repository.name }}' -d 'organization=oscasrgitops' -d 'visibility=public'
-         if [ $? -ne 0 ]; then
-           echo "Proyecto ya existe en Sonarcloud"
-           echo "::set-output name=proyectoExiste::1"
-         else
-           echo "Proyecto ${{ github.event.repository.name }} creado exitosamente en Sonarcloud"
-           
-           echo "Se establece rama main como rama por defecto"
-           curl -X POST -u '${{ secrets.SONAR_TOKEN }}:' 'https://sonarcloud.io/api/project_branches/rename' -d 'name=main' -d 'project=${{ github.event.repository.name }}'
-         fi
-         set -e
+          #pwd
+          #ls -R
+          set +e
+          curl -f -X POST -u '${{ secrets.SONAR_TOKEN }}:' 'https://sonarcloud.io/api/projects/create' -d 'name=${{ github.event.repository.name }}' -d 'project=${{ github.event.repository.name }}' -d 'organization=oscargitops' -d 'visibility=public'
+          if [ $? -ne 0 ]; then
+            echo "Proyecto ya existe en Sonarcloud"
+          else
+            echo "Proyecto ${{ github.event.repository.name }} creado exitosamente en Sonarcloud"
+            
+            echo "Se establece rama main como rama por defecto"
+            curl -X POST -u '${{ secrets.SONAR_TOKEN }}:' 'https://sonarcloud.io/api/project_branches/rename' -d 'name=main' -d 'project=${{ github.event.repository.name }}'
+          fi
+          set -e
