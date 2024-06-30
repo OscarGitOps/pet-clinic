@@ -71,4 +71,4 @@ jobs:
          -Dsonar.organization=oscargitops \
          -Dsonar.host.url=https://sonarcloud.io \
          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-         -Dsonar.branch.name=
+         -Dsonar.branch.name=feat-devsecops-osc
