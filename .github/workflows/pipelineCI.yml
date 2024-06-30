@@ -34,7 +34,7 @@ jobs:
         run: |
         
          set +e
-          response=$(curl -f -X POST -u '${{secrets.SONAR_TOKEN}}:' 'https://sonarcloud.io/api/projects/create' -d 'name=pet-clinic' -d 'project=pet-clinic' -d 'organization=oscargitops' -d 'visibility=public')
+          curl -f -X POST -u '${{secrets.SONAR_TOKEN}}:' 'https://sonarcloud.io/api/projects/create' -d 'name=pet-clinic' -d 'project=pet-clinic' -d 'organization=oscargitops' -d 'visibility=public'
 
           if [ $? -ne 0 ]; then
             echo "Proyecto ya existe en SonarCloud"
