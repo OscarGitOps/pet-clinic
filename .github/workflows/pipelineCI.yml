@@ -53,7 +53,7 @@ jobs:
               echo "Tipo de proyecto desconocido"
             fi          
       
-       ##Validando y/o creando proyecto en SonarCloud. Estabbleciendo rama main como rama por defecto
+       ##Validando y/o creando proyecto en SonarCloud. Estableciendo rama main como rama por defecto
       - name: Validando existencia de proyecto en SonarCloud
         id: validateProjectOnSonar
         run: |
