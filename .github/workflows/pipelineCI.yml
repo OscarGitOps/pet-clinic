@@ -5,7 +5,7 @@ on:
       - feat-devsecops-osc
 
 jobs:        
-  Build:
+  SAST:
     runs-on: ubuntu-latest
 
     
@@ -24,11 +24,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2  
         
-      - name: Log
-        run: ls -R
+      ##- name: Log
+      ##  run: ls -R
 
       ##permisos para gradlew y compilación de proyecto
-      - name: Build
-        run: | 
-          chmod 777 gradlew
-          ./gradlew build
+      ##- name: Build
+      ##  run: | 
+      ##    chmod 777 gradlew
+      ##    ./gradlew build
+      
+     ##Validando tipo de proeycto, verificando si tiene el plugin de sonarqube aplicado en el eo build.gradle
+      - name: Validando tipo de proyecto
+        id: tipoProyecto
+        run: |
+          if [ -f "build.gradle" ]
+            then
+              echo "Proyecto Java"
+              if grep -q 'id "org.sonarqube" version "3.3"' build.gradle
+              then
+                echo "El plugin de SonarCloud ya está presente en build.gradle"
+              else
+                sed -i '/id '\''java'\''/a \ \ \ \ id '\''org.sonarqube'\'' version '\''3.3'\''' build.gradle
+                echo "El plugin de SonarCloud no estaba presente y se ha sido añadido a build.gradle"
+                cat build.gradle
+              fi
+    
+            else
+              echo "Tipo de proyecto desconocido"
+            fi          
