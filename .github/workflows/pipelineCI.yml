@@ -29,35 +29,35 @@ jobs:
           ./gradlew build
     
     #sonarcloud  #actualizacion metodo basico
-      - name: Analisis SonarCloud
-        run: |
-         mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar \
-         -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
-         -Dsonar.host.url=https://sonarcloud.io \
-         -Dsonar.organization=oscargitops \
-         -Dsonar.projectKey=OscarGitOps_pet-clinic
+    #  - name: Analisis SonarCloud
+    #    run: |
+    #     mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.11.0.3922:sonar \
+    #     -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
+    #     -Dsonar.host.url=https://sonarcloud.io \
+    #     -Dsonar.organization=oscargitops \
+    #     -Dsonar.projectKey=OscarGitOps_pet-clinic
    
 
-      - name: Validando tipo de proyecto
-        id: tipoProyecto
-        run: |
-          pwd
-          ls -R
-          if [ -f "build.gradle" ]
-          then
-            echo "Proyecto Java"
-            if grep -q 'id "org.sonarqube" version "3.3"' build.gradle
-            then
-              echo "El plugin de SonarCloud ya está presente en build.gradle"
-            else
-              sed -i '/id '\''java'\''/a \ \ \ \ id '\''org.sonarqube'\'' version '\''3.3'\''' build.gradle
-              echo "El plugin de SonarCloud no estaba presente y se ha sido añadido a build.gradle"
-              cat build.gradle
-            fi
-
-          else
-            echo "Tipo de proyecto desconocido"
-          fi
+    #  - name: Validando tipo de proyecto
+    #    id: tipoProyecto
+    #    run: |
+    #      pwd
+    #      ls -R
+    #      if [ -f "build.gradle" ]
+    #      then
+    #        echo "Proyecto Java"
+    #        if grep -q 'id "org.sonarqube" version "3.3"' build.gradle
+    #        then
+    #          echo "El plugin de SonarCloud ya está presente en build.gradle"
+    #        else
+    #          sed -i '/id '\''java'\''/a \ \ \ \ id '\''org.sonarqube'\'' version '\''3.3'\''' build.gradle
+    #          echo "El plugin de SonarCloud no estaba presente y se ha sido añadido a build.gradle"
+    #          cat build.gradle
+    #        fi
+    #
+    #      else
+    #        echo "Tipo de proyecto desconocido"
+    #      fi
           
       #habilitar ejecucion
       - name: Enable execution gradlew
