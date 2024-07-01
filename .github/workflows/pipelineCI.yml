@@ -139,12 +139,17 @@ jobs:
         password: ${{ secrets.DOCKER_PASS }}
     
     ## anteriormente con actions/download-artifact@master
-    - name: Download JAR
-      uses: actions/download-artifact@v4 
-      with:
-        name: JAR
-        path: ./artifacts
+    #- name: Download JAR
+    #  uses: actions/download-artifact@v4 
+    #  with:
+    #    name: JAR
+    #    path: ./artifacts
     
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+
     - name: Build Docker
       run: |
         docker build --tag oscargitops/pet-clinic:latest .
