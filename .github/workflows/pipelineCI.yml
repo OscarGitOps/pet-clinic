@@ -125,7 +125,7 @@ jobs:
 # ----------------- Docker Build Image ----------------------------------------
   
   DockerBuild:
-    needs: SCA
+    #needs: SCA
     runs-on: self-hosted
     steps:
 
@@ -151,4 +151,4 @@ jobs:
     - name: Push Docker
       run: |
         docker push oscargitops/pet-clinic:latest          
-          
+    
