@@ -115,3 +115,9 @@ jobs:
           args: >
             --failOnCVSS 7
             --enableRetired
+            
+      - name: Upload Test result
+        uses: actions/upload-artifact@master
+        with:
+          name: Depcheck report
+          path: ${{github.workspace}}/reports
