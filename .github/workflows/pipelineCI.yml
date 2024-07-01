@@ -137,9 +137,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
-
+    
+    ## anteriormente con actions/download-artifact@master
     - name: Download JAR
-      uses: actions/download-artifact@master
+      uses: actions/download-artifact@v4 
       with:
         name: JAR
         path: ${{github.workspace}}
