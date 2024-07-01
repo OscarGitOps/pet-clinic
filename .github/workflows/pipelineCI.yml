@@ -110,6 +110,6 @@ jobs:
             path: '.'
             format: 'HTML'
               out: 'reports'
-              args: >
+              args: |
                 --failOnCVSS 7
                 --enableRetired
