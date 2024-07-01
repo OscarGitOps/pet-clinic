@@ -125,7 +125,7 @@ jobs:
 ## ----------------- Docker Build Image ----------------------------------------
   
   DockerBuild:
-    needs: SCA
+    #needs: SCA
     runs-on: self-hosted
     steps:
 
@@ -143,7 +143,7 @@ jobs:
       uses: actions/download-artifact@v4 
       with:
         name: JAR
-        path: ${{github.workspace}}
+        path: ./artifacts
     
     - name: Build Docker
       run: |
