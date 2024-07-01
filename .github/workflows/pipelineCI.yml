@@ -2,7 +2,7 @@ name: Workflows
 on:
   push:
     branches:
-      - feat-devsecops-osc
+      - feat-clase2
 
 jobs:        
   SAST:
@@ -59,7 +59,7 @@ jobs:
     #        echo "Tipo de proyecto desconocido"
     #      fi
           
-      #habilitar ejecucion
+    #habilitar ejecucion
       - name: Enable execution gradlew
         run: | 
          chmod 777 gradlew
@@ -121,3 +121,34 @@ jobs:
         with:
           name: Depcheck report
           path: ${{github.workspace}}/reports
+
+# ----------------- Docker Build Image ----------------------------------------
+  
+  DockerBuild:
+    needs: SCA
+    runs-on: self-hosted
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Docker Login
+      uses: docker/login-action@v3.0.0
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+
+    - name: Download JAR
+      uses: actions/download-artifact@master
+      with:
+        name: JAR
+        path: ${{github.workspace}}
+    
+    - name: Build Docker
+      run: |
+        docker build --tag oscargitops/pet-clinic:latest .
+
+    - name: Push Docker
+      run: |
+        docker push oscargitops/pet-clinic:latest          
+          
