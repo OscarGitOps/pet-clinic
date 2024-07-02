@@ -138,11 +138,11 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
    
-    #- name: Download JAR ..
-    #  uses: actions/download-artifact@master
-    #  with:
-    #    name: JAR
-    #    path: ${{github.workspace}}
+    - name: Download JAR ..
+      uses: actions/download-artifact@master
+      with:
+        name: JAR
+        path: ${{github.workspace}}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3  
@@ -154,5 +154,6 @@ jobs:
 
     - name: Push Docker
       run: |
-        docker push oscargitops/pet-clinic:latest          
+        docker push oscargitops/pet-clinic:latest
+        
     
