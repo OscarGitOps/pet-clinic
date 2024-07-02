@@ -117,7 +117,7 @@ jobs:
             --enableRetired
             
       - name: Upload Test result
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v4
         with:
           name: Depcheck report
           path: ${{github.workspace}}/reports
