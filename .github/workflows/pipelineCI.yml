@@ -122,6 +122,12 @@ jobs:
           name: Depcheck report
           path: ${{github.workspace}}/reports
 
+      - name: Upload Test result
+        uses: actions/upload-artifact@master
+        with:
+          name: JAR
+          path: ${{github.workspace}}/build/libs/spring-petclinic-2.6.0.jar
+
 ## ----------------- Docker Build Image ----------------------------------------
   
   DockerBuild:
