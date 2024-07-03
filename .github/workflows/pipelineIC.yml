@@ -181,7 +181,7 @@ jobs:
 
     - name: Pull de la Imagen Docker
       run: |
-        docker pull b4b4y4g4x/cursodevsecops-test:latest
+        docker pull oscargitops/pet-clinic:latest:latest
     
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
