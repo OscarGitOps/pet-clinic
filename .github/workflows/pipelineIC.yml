@@ -45,6 +45,7 @@ jobs:
         -Dsonar.branch.name=feat-clase3
 
     
+        
     - name: Validate Quality Gate
       run: |
         idanalisis=$(curl -f -X POST -u '${{ secrets.SONAR_TOKEN }}:' 'https://sonarcloud.io/api/ce/component?OscarGitOps_pet-clinic')
