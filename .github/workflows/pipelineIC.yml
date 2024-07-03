@@ -1,9 +1,8 @@
-#---- copia y compilado ---
 name: Workflow
 on:
   push:
     branches:
-      - feat-Clase3
+      - feat-clase3
 
 jobs:        
   SAST:
