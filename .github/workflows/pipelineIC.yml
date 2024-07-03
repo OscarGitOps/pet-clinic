@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 #---------------------  Compilacion proyecto -------------------------------------------
+=======
+#--------------------- Copia y compilacion de proyecto -------------------------------------------
+>>>>>>> refs/remotes/origin/feat-clase3
 name: Workflow
 on:
   push:
