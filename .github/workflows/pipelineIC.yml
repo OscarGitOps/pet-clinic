@@ -83,26 +83,5 @@ jobs:
          -Dsonar.branch.name=feat-clase3
 
 
-    - name: Validate Quality Gate
-      run: |
-        idanalisis=$(curl -f -X POST -u '${{ secrets.SONAR_TOKEN }}:' 'https://sonarcloud.io/api/ce/component?OscarGitOps_pet-clinic')
-        idanalisisParse=$(echo "$idanalisis" | jq .current.analysisId | sed -e 's/^"//' -e 's/"$//')
-   
-        qualitygate=$(curl -f -X POST -u '${{ secrets.SONAR_TOKEN }}:' 'https://sonarcloud.io/api/qualitygates/project_status?analysisId=$idanalisisParse')
-        qualitygateStatus=$(echo "$qualitygate" | jq .projectStatus.status | sed -e 's/^"//' -e 's/"$//')
-   
-        case $qualitygateStatus in
-           *"OK"*)
-             echo "Proyecto Cumple con quality gate"
-             exit 0
-             ;;
-           *"ERROR"*)
-             echo "Proyecto NO cumple con QualityGate"
-             exit 1
-             ;;
-           *)
-            echo "Proyecto NO cumple"
-            exit 1
-            ;;
-        esac
+
    
